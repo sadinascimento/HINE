@@ -1,0 +1,35 @@
+hiring department
+
+application process
+
+RESUME - (Curriculum)
+
+Recruiter - (RH)
+
+technical phone interviews
+	technical phone interviews
+	technical interviewers
+	interviewee
+
+
+background
+
+interests
+
+
+interviews scheduled
+
+
+
+
+
+Write a function with the following specification:
+
+Input: a list.
+Output: a copy of the list with duplicates removed.
+Ok, now, change the function to remove the last instances of duplicates instead of the first instances.
+
+
+Implement an algorithm that checks whether a sudoku puzzle is correctly solved or not.
+
+we won’t be moving forward in the process.
