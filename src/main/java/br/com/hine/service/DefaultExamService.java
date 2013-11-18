@@ -4,6 +4,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.hine.model.Answer;
@@ -13,6 +14,9 @@ import br.com.hine.model.Question;
 
 @Service
 public class DefaultExamService implements ExamService {
+
+	@Autowired
+	private ExamExporter exporter;
 
 	@Override
 	public Exam createRandomExam(Integer numOfQuestions) {
@@ -39,7 +43,7 @@ public class DefaultExamService implements ExamService {
 
 	private Question createQuestion() {
 		MultipleChoiceQuestion question = new MultipleChoiceQuestion();
-		
+
 		List<Answer> choices = new ArrayList<Answer>();
 		for (int i = 0; i < 5; i++) {
 			Answer answer = new Answer();
@@ -47,15 +51,19 @@ public class DefaultExamService implements ExamService {
 			answer.setDescription("option_" + i);
 			choices.add(answer);
 		}
-		
+
 		question.setChoices(choices);
-		
+
 		return question;
 	}
 
 	@Override
-	public void exportExamToDoc(Exam exam, OutputStream out) {
-		// TODO Auto-generated method stub
+	public void exportExamToDoc(Exam exam, OutputStream outputStream) {
+		exporter.export(exam, outputStream);
+	}
+
+	public void setExporter(ExamExporter exporter) {
+		this.exporter = exporter;
 	}
 
 }

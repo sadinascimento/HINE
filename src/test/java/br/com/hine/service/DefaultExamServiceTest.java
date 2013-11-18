@@ -1,16 +1,38 @@
 package br.com.hine.service;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import java.io.OutputStream;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import br.com.hine.model.Exam;
 
-@RunWith(JUnit4.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultExamServiceTest {
 
-	private DefaultExamService examService = new DefaultExamService();
+	private DefaultExamService examService;
+
+	@Mock
+	private ExamExporter exporter;
+
+	@Mock
+	private OutputStream outputStream;
+
+	@Mock
+	private Exam exam;
+
+	@Before
+	public void setup() {
+		examService = new DefaultExamService();
+		examService.setExporter(exporter);
+	}
 
 	@Test
 	public void shouldCreateExamWithTenQuestions() {
@@ -18,7 +40,13 @@ public class DefaultExamServiceTest {
 
 		Exam testExam = examService.createRandomExam(expected);
 
-		Assert.assertEquals(expected, testExam.getNumOfQuestions());
+		assertEquals(expected, testExam.getNumOfQuestions());
+	}
+
+	@Test
+	public void shouldInvokeExporter() {
+		examService.exportExamToDoc(exam, outputStream);
+		verify(exporter, times(1)).export(exam, outputStream);
 	}
 
 }

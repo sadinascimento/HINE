@@ -8,6 +8,6 @@ public interface ExamService {
 	
 	Exam createRandomExam(Integer numOfQuestions);
 	
-	void exportExamToDoc(Exam exam, OutputStream out);
+	void exportExamToDoc(Exam exam, OutputStream outputStream);
 
 }
