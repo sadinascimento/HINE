@@ -15,10 +15,10 @@ import br.com.hine.service.ExamService;
 @Controller
 public class ExamController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ExamController.class);
+
 	@Autowired
 	private ExamService examService;
-
-	private static final Logger logger = LoggerFactory.getLogger(ExamController.class);
 
 	@RequestMapping(value = "exam/random/{numOfQuestions}", method = RequestMethod.GET)
 	public @ResponseBody
